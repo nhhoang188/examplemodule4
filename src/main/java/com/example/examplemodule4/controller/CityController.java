@@ -14,6 +14,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/")
 public class CityController {
@@ -31,9 +33,15 @@ public class CityController {
         return new ModelAndView("/views/index");
     }
     @GetMapping("/city")
-    public ModelAndView showListCity(@PageableDefault(size = 1) Pageable pageable){
+    public ModelAndView showListCity(@PageableDefault(size = 1) Pageable pageable, @RequestParam("search") Optional<String> s){
+        Page<City> cities;
+        if (s.isPresent()) {
+            cities = cityService.findAllByName(pageable, s.get());
+        } else {
+            cities = cityService.findAll(pageable);
+        }
         ModelAndView modelAndView = new ModelAndView("/views/listall");
-        modelAndView.addObject("cities", cityService.findAll(pageable));
+        modelAndView.addObject("cities", cities );
         return modelAndView ;
     }
     @GetMapping("/city/{id}")
@@ -81,9 +89,9 @@ public class CityController {
     }
 
     @PostMapping("/city/delete")
-    public ModelAndView modelAndView(@RequestParam Long id){
-        ModelAndView modelAndView = new ModelAndView("/views/index");
+    public ModelAndView modelAndView(@RequestParam("id") Long id){
         cityService.deleteById(id);
+        ModelAndView modelAndView = new ModelAndView("/views/index");
         modelAndView.addObject("message", "Delete Success!");
         return modelAndView;
     }

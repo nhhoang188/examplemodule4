@@ -7,7 +7,7 @@
 <body>
 <fieldset>
     <legend>Do you want delete?</legend>
-    <form th:action="@{/delete}" method="post">
+    <form th:action="@{/city/delete}" method="post">
         <input name="id" type="hidden" th:value="${id}">
         <input type="submit" value="Xoa">
     </form>

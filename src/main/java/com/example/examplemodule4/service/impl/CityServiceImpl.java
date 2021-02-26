@@ -22,7 +22,7 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public Page<City> findAllByName(Pageable pageable, String name) {
-        return null;
+        return cityRepository.findAllByNameContaining(pageable, name);
     }
 
     @Override
@@ -44,4 +44,5 @@ public class CityServiceImpl implements CityService {
     public void deleteById(Long id) {
         cityRepository.deleteById(id);
     }
+
 }

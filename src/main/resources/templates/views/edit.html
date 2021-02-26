@@ -34,7 +34,7 @@
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
                             class="ti-menu ti-close"></i></a>
 
-                    <a class="navbar-brand" href="/admin">
+                    <a class="navbar-brand" href="/">
 
                         <b class="logo-icon p-l-10">
 
@@ -73,11 +73,6 @@
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href=""
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
                                     th:src="@{/assets/images/users/1.jpg}" alt="user" class="rounded-circle" width="31"></a>
-                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
-                                    My
-                                    Profile</a>
-                            </div>
                         </li>
 
                     </ul>
@@ -85,89 +80,26 @@
             </nav>
         </section>
 
-        <aside class="left-sidebar" data-sidebarbg="skin5">
 
+        <!--Menu-->
+        <aside class="left-sidebar" data-sidebarbg="skin5">
             <div class="scroll-sidebar">
 
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30 in">
-
-
                         <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                    href="/admin/edit-hotel" aria-expanded="false"><i
-                                class="ti-pencil"></i><span class="hide-menu">Hotel</span></a>
-                        </li>
-
-                        <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
-                                                    href="/admin/edit-user" aria-expanded="false"><i
-                                class="ti-pencil"></i><span class="hide-menu">User</span></a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item"><a href="/admin/edit-user" class="sidebar-link"><i
-                                        class="mdi mdi-note-outline"></i><span class="hide-menu"> edit user </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="/admin/edit-user/browsing" class="sidebar-link"><i
-                                        class="mdi mdi-note-plus"></i><span class="hide-menu"> account browsing</span></a>
-                                </li>
-                            </ul>
+                                                    href="/city" aria-expanded="false"><i
+                                class="ti-pencil"></i><span class="hide-menu">City</span></a>
                         </li>
                         <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                    href="/admin/edit-tour" aria-expanded="false"><i
-                                class="ti-pencil"></i><span class="hide-menu">Tour</span></a>
+                                                    href="/" aria-expanded="false"><i
+                                class="ti-pencil"></i><span class="hide-menu">Country</span></a>
                         </li>
-                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                    href="/admin/edit-booking" aria-expanded="false"><i
-                                class="ti-pencil"></i><span class="hide-menu">Booking</span></a>
-                        </li>
-                        <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
-                                                    href="/admin/edit-blog" aria-expanded="false"><i
-                                class="ti-pencil"></i><span class="hide-menu">Blog</span></a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item"><a href="/admin/edit-blog" class="sidebar-link"><i
-                                        class="mdi mdi-note-outline"></i><span class="hide-menu"> edit blog </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="/admin/edit-blog/browsing" class="sidebar-link"><i
-                                        class="mdi mdi-note-plus"></i><span class="hide-menu"> blog browsing</span></a>
-                                </li>
-                            </ul>
-                        </li>
-
                     </ul>
                 </nav>
             </div>
-
         </aside>
     </div>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#registerform').submit(function (event) {
-                var firstName = $('#firstname').val();
-                var lastName = $('#lastname').val();
-                var username = $('#username').val();
-                var password = $('#password').val();
-                var email = $('#email').val();
-                var phone = $('#phone').val();
-                var address = $('#address').val();
-                var json = {"firstName":firstName, "lastName":lastName, "username":username, "password":password, "email":email, "phone":phone, "address":address};
-                $.ajax({
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    type : "POST",
-                    data: JSON.stringify(json),
-                    url: "/register",
-                    success: function(data) {
-                        alert("Hello");
-                    },
-                    error: function() {
-                        window.location.replace("/login");
-                    }
-                });
-                event.preventDefault();
-            });
-        });
-    </script>
 </head>
 
 <body>

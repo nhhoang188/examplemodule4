@@ -99,7 +99,8 @@
                                         class="mdi mdi-note-outline"></i><span class="hide-menu"> edit user </span></a>
                                 </li>
                                 <li class="sidebar-item"><a href="/admin/edit-user/browsing" class="sidebar-link"><i
-                                        class="mdi mdi-note-plus"></i><span class="hide-menu"> account browsing</span></a>
+                                        class="mdi mdi-note-plus"></i><span
+                                        class="hide-menu"> account browsing</span></a>
                                 </li>
                             </ul>
                         </li>
@@ -141,38 +142,33 @@
                         <table id="zero_config" class="table table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th></th>
-                                <th></th>
-                                <th>Tên Khách Sạn</th>
-                                <th>Địa Chỉ</th>
-                                <th>Quản Lý Phòng</th>
-                                <th>Tiện ích</th>
-                                <th>Thông tin đầy đủ</th>
-                                <th>Thông tin mô tả</th>
-                                <th>Link Ảnh Hiển Thị</th>
-                                <th>Link Ảnh Mô Tả</th>
-                                <th>Link Ảnh Mô Tả</th>
-                                <th>Link Ảnh Đặt Phòng</th>
+                                <th>Stt</th>
+                                <th>City</th>
+                                <th>Country</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr >
-
-
-
+                            <tr th:each="item : ${cities}">
+                                <td><span th:text="${item.getId()}"></span></td>
+                                <td><a th:href="@{/city/__${item.id}__}" th:text="${item.getName()}"> </a></td>
+                                <td th:text="${item.getCountry().getName()}"></td>
+                                <td><a th:href="@{/city/edit/__${item.id}__}">edit</a></td>
+                                <td><a th:href="@{/city/delete/__${item.id}__}">delete</a></td>
                             </tr>
                             </tbody>
                         </table>
 
                         <!--Phân Trang-->
-<!--                        <div>-->
-<!--                            <a th:href="@{'/admin/edit-hotel'(page=${listHotel.number - 1})}"-->
-<!--                               th:if="${listHotel.hasPrevious()}">Previous</a>-->
-<!--                            <span th:text="${listHotel.number + 1}"></span>/<span-->
-<!--                                th:text="${listHotel.totalPages}"></span>-->
-<!--                            <a th:href="@{'/admin/edit-hotel'(page=${listHotel.number + 1})}"-->
-<!--                               th:if="${listHotel.hasNext()}">Next</a>-->
-<!--                        </div>-->
+                        <div>
+                            <a th:href="@{'/city'(page=${cities.number - 1})}"
+                               th:if="${cities.hasPrevious()}">Previous</a>
+                            <span th:text="${cities.number + 1}"></span>/<span
+                                th:text="${cities.totalPages}"></span>
+                            <a th:href="@{'/city'(page=${cities.number + 1})}"
+                               th:if="${cities.hasNext()}">Next</a>
+                        </div>
                     </div>
 
                 </div>

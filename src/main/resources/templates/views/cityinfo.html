@@ -73,11 +73,6 @@
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href=""
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
                                     th:src="@{/assets/images/users/1.jpg}" alt="user" class="rounded-circle" width="31"></a>
-                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
-                                    My
-                                    Profile</a>
-                            </div>
                         </li>
 
                     </ul>
@@ -85,19 +80,17 @@
             </nav>
         </section>
 
-        <aside class="left-sidebar" data-sidebarbg="skin5">
 
+        <!--Menu-->
+        <aside class="left-sidebar" data-sidebarbg="skin5">
             <div class="scroll-sidebar">
 
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30 in">
-
-
                         <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                     href="/admin/edit-hotel" aria-expanded="false"><i
                                 class="ti-pencil"></i><span class="hide-menu">Hotel</span></a>
                         </li>
-
                         <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                                     href="/admin/edit-user" aria-expanded="false"><i
                                 class="ti-pencil"></i><span class="hide-menu">User</span></a>
@@ -110,78 +103,26 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                    href="/admin/edit-tour" aria-expanded="false"><i
-                                class="ti-pencil"></i><span class="hide-menu">Tour</span></a>
-                        </li>
-                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                    href="/admin/edit-booking" aria-expanded="false"><i
-                                class="ti-pencil"></i><span class="hide-menu">Booking</span></a>
-                        </li>
-                        <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
-                                                    href="/admin/edit-blog" aria-expanded="false"><i
-                                class="ti-pencil"></i><span class="hide-menu">Blog</span></a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item"><a href="/admin/edit-blog" class="sidebar-link"><i
-                                        class="mdi mdi-note-outline"></i><span class="hide-menu"> edit blog </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="/admin/edit-blog/browsing" class="sidebar-link"><i
-                                        class="mdi mdi-note-plus"></i><span class="hide-menu"> blog browsing</span></a>
-                                </li>
-                            </ul>
-                        </li>
-
                     </ul>
                 </nav>
             </div>
-
         </aside>
     </div>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#registerform').submit(function (event) {
-                var firstName = $('#firstname').val();
-                var lastName = $('#lastname').val();
-                var username = $('#username').val();
-                var password = $('#password').val();
-                var email = $('#email').val();
-                var phone = $('#phone').val();
-                var address = $('#address').val();
-                var json = {"firstName":firstName, "lastName":lastName, "username":username, "password":password, "email":email, "phone":phone, "address":address};
-                $.ajax({
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    type : "POST",
-                    data: JSON.stringify(json),
-                    url: "/register",
-                    success: function(data) {
-                        alert("Hello");
-                    },
-                    error: function() {
-                        window.location.replace("/login");
-                    }
-                });
-                event.preventDefault();
-            });
-        });
-    </script>
 </head>
 
-<body>
+<body th:object="${city}">
+
 
 <div class="page-wrapper">
 
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">Tables</h4>
+                <h4 class="page-title" ><a th:text="${city.get().getName()}"></a></h4>
                 <div class="ml-auto text-right">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/city">List City</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Library</li>
                         </ol>
                     </nav>
@@ -196,40 +137,21 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-
-                        <table id="zero_config" class="table table-striped table-bordered">
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>User name</th>
-                                <th>Status</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Address</th>
-                                <th>userRole/th>
-                                <th>Status</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><a href="/">Edit</a></td>
-                                <td><a href="/">Delete</a></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <h2>Name: <a th:text="${city.get.getName()}"></a></h2>
+                        <h2>Country: <a th:text="${city.get.getCountry().getName()}"></a></h2>
+                        <h2>Area: <a th:text="${city.get.getArea()}"></a></h2>
+                        <h2>Population: <a th:text="${city.get.getPopulation()}"></a></h2>
+                        <h2>GDP: <a th:text="${city.get.getGDP()}"></a></h2>
+                        <h2>Description: <a th:text="${city.get.getDescription()}"></a></h2>
                     </div>
-
+                    <a th:href="@{/city/edit/__${city.get().getId()}__}">Update</a>
+                    <a th:href="@{/city/delete/__${city.get().getId()}__}">Delete</a>
                 </div>
             </div>
         </div>
     </div>
 
 </div>
-
-
 
 
 <script th:src="@{/assets/libs/jquery/dist/jquery.min.js}"></script>
@@ -242,6 +164,37 @@
 <script th:src="@{/dist/js/custom.min.js}"></script>
 <script th:src="@{/assets/libs/jquery-steps/build/jquery.steps.min.js}"></script>
 <script th:src="@{/assets/libs/jquery-validation/dist/jquery.validate.min.js}"></script>
+<script>
+    var form = $("#example-form");
+    form.validate({
+        errorPlacement: function errorPlacement(error, element) {
+            element.before(error);
+        },
+        rules: {
+            confirm: {
+                equalTo: "#password"
+            }
+        }
+    });
+    form.children("div").steps({
+        headerTag: "h3",
+        bodyTag: "section",
+        transitionEffect: "slideLeft",
+        onStepChanging: function (event, currentIndex, newIndex) {
+            form.validate().settings.ignore = ":disabled,:hidden";
+            return form.valid();
+        },
+        onFinishing: function (event, currentIndex) {
+            form.validate().settings.ignore = ":disabled";
+            return form.valid();
+        },
+        onFinished: function (event, currentIndex) {
+            alert("Submitted!");
+        }
+    });
+
+
+</script>
 </body>
 
 </html>
